@@ -47,7 +47,7 @@ public class Login extends BaseClass {
 		Thread.sleep(400);
 		driver.findElement(By.cssSelector("input[name='aadhaarNo']")).sendKeys("222222222233"); //enter Aadhar No
 		Thread.sleep(400);
-		driver.findElement(By.className("verifyBtnActive")).click();  //click verify
+		driver.findElement(By.className("OCR-verifyBtn")).click();  //click verify
 		Thread.sleep(400);
 		driver.findElement(By.cssSelector("input[name='checkedG']")).click(); 
 		Thread.sleep(400);
@@ -57,6 +57,15 @@ public class Login extends BaseClass {
 		driver.findElement(By.xpath("//button[text()='Verify OTP']")).click();
 		WebElement skipBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Skip']")));
 		skipBtn.click();
+		driver.findElement(By.className("OCR-upload-Btn")).click();
+		driver.findElement(By.className("RenderCustomDropdown__labelText__2TLdA")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//li[text()='Letter issued by National Population Register']")).click();
+		Thread.sleep(2000);
+		
+		//WebElement upload = //driver.findElement(By.className("FileUpload__iconWrap__11JdV"));
+		driver.findElement(By.xpath("//input[@type='file']")).sendKeys("C:\\Users\\PrashantSinghTomar\\Downloads\\ISTQB_CTFL_Syllabus_v4.0.1.pdf");
+		
 		int randomPAN = (int) Math.random()*10000;
 		String PAN;
 		if (self.isEnabled())
@@ -71,14 +80,15 @@ public class Login extends BaseClass {
 
 		}
 		Thread.sleep(300);
-		driver.findElement(By.cssSelector("input[name='panNumber']")).sendKeys(PAN);
+		WebElement pan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='panNumber']")));
+		pan.sendKeys(PAN);
 		Thread.sleep(300);
 		int MobNo = (int) (Math.random()*1000000000);
 		WebElement mobNo = driver.findElement(By.cssSelector("input[name='mobileNumber']"));
 		actions.moveToElement(mobNo).perform();
 		mobNo.sendKeys("9"+String.valueOf(MobNo));
 		Thread.sleep(300);
-		driver.findElement(By.cssSelector("input[name='email']")).sendKeys("prashant.tomar@crestechsoftware.com");
+		driver.findElement(By.cssSelector("input[name='email']")).sendKeys("tomarps2208@gamil.com");
 		Thread.sleep(300);
 		//driver.findElement(By.cssSelector("input[name='customerConsentFlag']")).click();
 		Thread.sleep(300);
@@ -129,21 +139,20 @@ public class Login extends BaseClass {
 		WebElement panAdhaarLinkConf = wait.until(
 		        ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Cancel']")));
 		panAdhaarLinkConf.click();
-		WebElement countryInput = driver.findElement(By.id("communicationCountry_idd"));
+		WebElement countryInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("communicationCountry_idd")));
+
+		//WebElement countryInput = driver.findElement(By.id("communicationCountry_idd"));
 		countryInput.click();
 		Thread.sleep(2000);
 
-		//countryInput.sendKeys("Ind");
-		//List<WebElement> suggestions = wait.until(
-		  //      ExpectedConditions.visibilityOfAllElementsLocatedBy(
-		    //            By.xpath("//div[(@name,'communicationCountry')]")
-		      //  )
-		//);
-		//for(WebElement option : suggestions) {
-		  //  if(option.getText().equalsIgnoreCase("India")) {
-		    //    option.click();
-		      //  break;
-		    //}
-	//}
+		countryInput.sendKeys("Ind");
+		List<WebElement> suggestions = wait.until(
+		  ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[(@name,'communicationCountry')]")));
+		for(WebElement option : suggestions) {
+		if(option.getText().equalsIgnoreCase("India")) {
+		option.click();
+		break;
+		}
+	}
 }
 }
