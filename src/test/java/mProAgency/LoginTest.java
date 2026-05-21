@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import mProAGency.*;
 
-public class Login extends BaseClass {
+public class LoginTest extends BaseClass {
 
 	
 	@Test()
