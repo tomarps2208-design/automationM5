@@ -154,5 +154,6 @@ public class LoginTest extends BaseClass {
 		break;
 		}
 	}
-}
+		System.out.println("Test Jenkins update");
+	}
 }
