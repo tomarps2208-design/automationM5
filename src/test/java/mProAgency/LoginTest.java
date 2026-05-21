@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -17,12 +18,17 @@ import org.testng.annotations.Test;
 
 import mProAGency.*;
 
-public class LoginTest extends BaseClass {
+public class LoginTest {
 
 	
 	@Test()
 	public void stageOne() throws InterruptedException
 	{
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://mprouat.axismaxlife.com/");
+		driver.findElement(By.id("userId")).sendKeys("121939");
+		driver.findElement(By.id("password")).sendKeys("Login!2347");
+		driver.findElement(By.xpath("//button[contains(text(),'SIGN IN')]"));
 		Actions actions = new Actions(driver);
 		actions.keyDown(Keys.CONTROL).sendKeys(Keys.SUBTRACT).sendKeys(Keys.SUBTRACT).sendKeys(Keys.SUBTRACT).keyUp(Keys.CONTROL).perform();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -154,6 +160,6 @@ public class LoginTest extends BaseClass {
 		break;
 		}
 	}
-		System.out.println("Test Jenkins update");
+
 	}
 }
